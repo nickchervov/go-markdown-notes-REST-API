@@ -31,7 +31,7 @@ func RunApp(ctx context.Context) error {
 	if err != nil {
 		return fmt.Errorf("creating repository: %w", err)
 	}
-	cache := adapters.NewRedis()
+	cache := adapters.NewRedis(os.Getenv("REDIS_HOST"))
 
 	svc := service.New(repo, cache)
 	routes := connectors.SetRoutes(svc)

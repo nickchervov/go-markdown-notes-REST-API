@@ -12,8 +12,9 @@ type Redis struct {
 	rdb *redis.Client
 }
 
-func NewRedis() *Redis {
-	return &Redis{rdb: redis.NewClient(&redis.Options{Addr: "localhost:6379"})}
+func NewRedis(host string) *Redis {
+	addr := host + ":6379"
+	return &Redis{rdb: redis.NewClient(&redis.Options{Addr: addr})}
 }
 
 func (r *Redis) RateLimit(ctx context.Context, rpm int, ip string) (int, bool, error) {
