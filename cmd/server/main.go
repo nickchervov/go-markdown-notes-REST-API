@@ -11,7 +11,7 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/nickchervov/go-markdown-notes-REST-API/internal/adapters"
-	"github.com/nickchervov/go-markdown-notes-REST-API/internal/connectors"
+	"github.com/nickchervov/go-markdown-notes-REST-API/internal/controllers"
 	"github.com/nickchervov/go-markdown-notes-REST-API/internal/service"
 	"github.com/nickchervov/go-markdown-notes-REST-API/pkg/httpserver"
 )
@@ -34,7 +34,7 @@ func RunApp(ctx context.Context) error {
 	cache := adapters.NewRedis(os.Getenv("REDIS_HOST"))
 
 	svc := service.New(repo, cache)
-	routes := connectors.SetRoutes(svc)
+	routes := controllers.SetRoutes(svc)
 	server := httpserver.New(os.Getenv("PORT"), routes)
 
 	go func() {

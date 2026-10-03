@@ -1,4 +1,4 @@
-package connectors
+package controllers
 
 import (
 	"net"

@@ -1,4 +1,4 @@
-package connectors
+package controllers
 
 import "github.com/nickchervov/go-markdown-notes-REST-API/internal/service"
 
