@@ -5,7 +5,6 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"log"
 
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/database/postgres"
@@ -95,7 +94,7 @@ func (p *Postgres) GetNotes(ctx context.Context, page, limit int) ([]domain.Note
 
 func (p *Postgres) GetNotesBySearch(ctx context.Context, search string) ([]domain.Note, error) {
 	searchForDb := "%" + search + "%"
-	log.Println(searchForDb)
+
 	query := "SELECT id, title, content, tags, created_at, updated_at FROM notes WHERE title LIKE $1"
 	var notes []domain.Note
 	if err := p.db.SelectContext(ctx, &notes, query, searchForDb); err != nil {
